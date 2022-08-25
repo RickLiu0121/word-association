@@ -11,7 +11,7 @@ function App() {
     fetch("http://localhost:3001/api/associations/" + word)
       .then((result) => result.json())
       .then((body) => {
-        console.log(body);
+        //console.log(body);
         setAssociations(body);
       });
   };
@@ -21,6 +21,22 @@ function App() {
       <h1>Word Associations Map</h1>
       <input value={word} onChange={(e) => setWord(e.target.value)} />
       <button onClick={getAssociations}>Find Associations</button>
+
+      {
+        // Apply conditional rendering
+        associations &&
+          //Object.keys returns an array of a given objects' own enumerzble property names
+          (Object.keys(associations).length === 0 ? (
+            <p>No results</p>
+          ) : (
+            <div>
+              {/* Object.entries returns an array of the given object's string-key pair -> Nested Array */}
+              {Object.entries(associations).map(([association, score]) => (
+                <span key={association}>{association}</span>
+              ))}
+            </div>
+          ))
+      }
     </div>
   );
 }
