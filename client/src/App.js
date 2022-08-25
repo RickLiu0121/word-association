@@ -2,7 +2,9 @@ import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
 import { useState } from "react";
-
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import AbcIcon from "@mui/icons-material/Abc";
 function App() {
   const [word, setWord] = useState("software");
   const [associations, setAssociations] = useState(null);
@@ -11,7 +13,7 @@ function App() {
     fetch("http://localhost:3001/api/associations/" + word)
       .then((result) => result.json())
       .then((body) => {
-        //console.log(body);
+        console.log(body);
         setAssociations(body);
       });
   };
@@ -19,9 +21,24 @@ function App() {
   return (
     <div className="app">
       <h1>Word Associations Map</h1>
-      <input value={word} onChange={(e) => setWord(e.target.value)} />
-      <button onClick={getAssociations}>Find Associations</button>
-
+      {/* <input value={word} onChange={(e) => setWord(e.target.value)} /> */}
+      <TextField
+        style={{ diplay: "inline" }}
+        label="Required"
+        id="standard-basic"
+        value={word}
+        onChange={(e) => setWord(e.target.value)}
+      >
+        {word}
+      </TextField>
+      <Button
+        endIcon={<AbcIcon />}
+        variant="contained"
+        color="secondary"
+        onClick={getAssociations}
+      >
+        Find Associations
+      </Button>
       {
         // Apply conditional rendering
         associations &&
