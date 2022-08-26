@@ -8,7 +8,7 @@ const axios = require("axios");
 
 const options = {
   method: "GET",
-  url: "https://twinword-word-associations-v1.p.rapidapi.com/associations/",
+  url: "https://api.twinword.com/api/word/associations/latest/",
   params: { entry: "sound" },
   headers: {
     "X-RapidAPI-Key":
